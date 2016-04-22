@@ -3,7 +3,7 @@ const path = require('path')
 const ignoredCategories = ['table_of_contents', 'tips', 'contribute', 'license']
 const headingPattern = /^## /
 const subHeadingPattern = /^### /
-const itemPattern = /^- \[(.*)\]\((.*)\)(.*)/
+const itemPattern = /^- \[(.*)\]\((\S*)\)(.*)/
 const slug = function slug(str) { return str.toLowerCase().replace(/ /g, '_')}
 
 module.exports = function() {
@@ -35,7 +35,7 @@ module.exports = function() {
           href: itemParts[2],
         }
         if (itemParts[3]) {
-          item.description = itemParts[3].replace(/^ - /, '')
+          item.description = itemParts[3].replace(/.* - /, '')
         }
         item.category = category
         if (subcategory) { item.subcategory = subcategory}
